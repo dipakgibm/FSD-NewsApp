@@ -14,6 +14,9 @@ import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 import Bookmark from "./components/board-bookmark.component"; 
 import Source from "./components/board-source.component"
+import Dashboard from "./components/dashboard";
+import Card from "./components/card";
+import Search from "./components/Search";
  
 
 // import AuthVerify from "./common/auth-verify";
@@ -30,6 +33,8 @@ class App extends Component {
       currentUser: undefined,
       bookmark:undefined,
       source:undefined,
+      dashboard:undefined,
+      search:undefined,
     };
   }
 
@@ -43,6 +48,8 @@ class App extends Component {
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
         bookmark: user,
         source:user,
+        dashboard:user,
+        search:user,
       });
     }
     
@@ -63,11 +70,13 @@ class App extends Component {
       currentUser: undefined,
       bookmark:undefined,
       source:undefined,
+      dashboard:undefined,
+      search:undefined,
     });
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard,bookmark,source } = this.state;
+    const { currentUser, showModeratorBoard, showAdminBoard,bookmark,source,dashboard,search } = this.state;
 
     return (
       <div>
@@ -81,6 +90,14 @@ class App extends Component {
                 Home
               </Link>
             </li>
+            
+            {search && (
+              <li className="nav-item">
+                <Link to={"/search"} className="nav-link">
+                  Search
+                </Link>
+              </li>
+            )}
 
             {bookmark && (
               <li className="nav-item">
@@ -97,6 +114,22 @@ class App extends Component {
                 </Link>
               </li>
             )}
+
+            {dashboard && (
+              <li className="nav-item">
+                <Link to={"/dashboard"} className="nav-link">
+                  Dashboard
+                </Link>
+              </li>
+            )}
+
+            {/* {card && (
+              <li className="nav-item">
+                <Link to={"/card"} className="nav-link">
+                  Card
+                </Link>
+              </li>
+            )} */}
 
             {showModeratorBoard && (
               <li className="nav-item">
@@ -165,6 +198,9 @@ class App extends Component {
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/bookmark" component={Bookmark} />
             <Route path="/source" component={Source} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/search" component={Search} />
+            {/* <Navbar.Brand href="/Search">Search</Navbar.Brand> */}
 
           </Switch>
         </div>
