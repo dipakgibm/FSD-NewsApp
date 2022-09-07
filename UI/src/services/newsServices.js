@@ -20,6 +20,19 @@ export class NewsService {
     }
   };
   
+  getArticles = async (category) => {
+    const url = `${this.api}${this.top_enpoint}?country=in&category=${category}&apiKey=${this.apikey}`;
+    try {
+      let response = await fetch(url);
+      if (response.ok) {
+        let json = await response.json();
+        return json;
+      }
+      throw new Error(response.status);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   addToReadLater = async (article) => {
     try {

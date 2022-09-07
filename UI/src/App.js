@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
 import AuthService from "./services/auth.service";
 
@@ -17,6 +18,7 @@ import Source from "./components/board-source.component"
 import Dashboard from "./components/dashboard";
 import Card from "./components/card";
 import Search from "./components/Search";
+import Category from "./components/Category";
  
 
 // import AuthVerify from "./common/auth-verify";
@@ -35,6 +37,7 @@ class App extends Component {
       source:undefined,
       dashboard:undefined,
       search:undefined,
+      category:undefined,
     };
   }
 
@@ -50,6 +53,7 @@ class App extends Component {
         source:user,
         dashboard:user,
         search:user,
+        category:user,
       });
     }
     
@@ -72,11 +76,12 @@ class App extends Component {
       source:undefined,
       dashboard:undefined,
       search:undefined,
+      category:undefined,
     });
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard,bookmark,source,dashboard,search } = this.state;
+    const { currentUser, showModeratorBoard, showAdminBoard,bookmark,source,dashboard,search,category } = this.state;
 
     return (
       <div>
@@ -107,10 +112,23 @@ class App extends Component {
               </li>
             )}
 
-            {source && (
+            {/* {source && (
               <li className="nav-item">
                 <Link to={"/source"} className="nav-link">
                   Source
+                </Link>
+              </li>
+            )} */}
+             {category && (
+              <li className="nav-item">
+                
+                <Link to={"/category"} className="nav-link">
+                <DropdownButton id="dropdown-basic-button" title="Categories">
+        <Dropdown.Item href="/Business">Business</Dropdown.Item>
+        <Dropdown.Item href="/Sports">Sports</Dropdown.Item>
+        <Dropdown.Item href="/Entertainment">Entertainment</Dropdown.Item>
+      </DropdownButton>
+                  Category
                 </Link>
               </li>
             )}
@@ -188,6 +206,7 @@ class App extends Component {
         </nav>
 
         <div className="container mt-3">
+        <BrowserRouter>
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
@@ -197,12 +216,28 @@ class App extends Component {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/bookmark" component={Bookmark} />
-            <Route path="/source" component={Source} />
+            {/* <Route path="/source" component={Source} /> */}
+            <Route path="/category" component={Category} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/search" component={Search} />
+
+            
+                {/* <Routes> */}
+                  <Route path="Business" element={<Category category="Business" />} />
+                  
+                  <Route path="Sports" element={<Category category="Sports" />} />
+                  
+                  <Route path="Entertainment" element={<Category category="Entertainment" />} />
+                {/* </Routes> */}
+              
+
+            {/* <Route path="/business" component={<Category category="Business" />} />
+            <Route path="/sports" component={<Category category="Sports" />} />
+            <Route path="/entertainment" component={<Category category="Entertainment" />} /> */}
             {/* <Navbar.Brand href="/Search">Search</Navbar.Brand> */}
 
           </Switch>
+          </BrowserRouter>
         </div>
 
         { /*<AuthVerify logOut={this.logOut}/> */ }
