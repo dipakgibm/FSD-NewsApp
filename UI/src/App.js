@@ -18,6 +18,7 @@ import Search from "./components/Search";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { BrowserRouter, Routes,Navigate } from "react-router-dom";
 import Source from "./components/source"
+import Footer from "./components/Footer/Footer"
 
 
 // import AuthVerify from "./common/auth-verify";
@@ -247,6 +248,7 @@ class App extends Component {
             <Route exact path="/reuters"><Source domains="reuters.com" /></Route> 
             <Route exact path="/washingtonpost"><Source domains="washingtonpost.com" /></Route> 
             <Route exact path="/thenextweb"><Source domains="thenextweb.com" /></Route> 
+            <Footer/>
 
 
 </BrowserRouter>
