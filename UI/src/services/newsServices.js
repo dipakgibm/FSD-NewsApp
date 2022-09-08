@@ -3,8 +3,8 @@ export class NewsService {
   api = "https://newsapi.org/v2";
   top_enpoint = "/top-headlines";
 
-  getDashboardArticles = async (country) => {
-    const url = `${this.api}${this.top_enpoint}?country=${country}&apikey=${this.apikey}&page=1`;
+  getDashboardArticles = async (country,page) => {
+    const url = `${this.api}${this.top_enpoint}?country=${country}&apikey=${this.apikey}&page=${page+1}`;
 
     try {
       let response = await fetch(url);
@@ -19,21 +19,57 @@ export class NewsService {
       console.error(e);
     }
   };
+  getArticles = async (source) => {
+    const url = `${this.api}${this.top_enpoint}?country=in&category=${source}&apiKey=${this.apikey}`;
+    try {
+      let response = await fetch(url);
+      if (response.ok) {
+        let json = await response.json();
+        return json;
+      }
+      throw new Error(response.status);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  getArticlesBySource = async (domain) => {
+    //const url = `${this.api}${this.top_enpoint}?country=in&category=${source}&apiKey=${this.apikey}`;
+      const url=`https://newsapi.org/v2/everything?domains=${domain}&apiKey=${this.apikey}`
+    try {
+      let response = await fetch(url);
+      if (response.ok) {
+        let json = await response.json();
+        return json;
+      }
+      throw new Error(response.status);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+
+  handledNextClick = async (country)=>{
+    console.log("Next")
+    const url = `${this.api}${this.top_enpoint}?country=${country}&apikey=${this.apikey}&page=${this.state.page+1}`;
+    let response = await fetch(url);
+    let json = await response.json();
+    console.log(json)
+    this.setState({
+      page:this.state.page+1,
+    })
+
+    }
+
+    handledPreviousClick = async(country)=>{
+      console.log("previous")
+      const url = `${this.api}${this.top_enpoint}?country=${country}&apikey=${this.apikey}&page=1`;
+      let response = await fetch(url);
+      let json = await response.json();
+      console.log(json)
+      
+    }
   
-  getArticles = async (category) => {
-    const url = `${this.api}${this.top_enpoint}?country=in&category=${category}&apiKey=${this.apikey}`;
-    try {
-      let response = await fetch(url);
-      if (response.ok) {
-        let json = await response.json();
-        return json;
-      }
-      throw new Error(response.status);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   addToReadLater = async (article) => {
     try {
       const url = "http://localhost:3001/articles";

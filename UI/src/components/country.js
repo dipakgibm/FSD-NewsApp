@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { CardGroup } from "react-bootstrap";
-import  Card  from "./card";
-import { NewsService }  from "../services/newsServices";
+import Card from "./card";
+import { NewsService } from "../services/newsServices";
+import pagination from "./pagination"
 
-class Category extends React.Component {
+
+class category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       articles: [],
     };
-    this.newsServices = new NewsService();
+    this.newsService = new NewsService();
   }
 
   componentDidMount() {
-    this.newsServices.getArticles(this.props.category).then((data) => {
+    this.newsService.getDashboardArticles(this.props.countries).then((data) => {
       this.setState({
         articles: data.articles,
       });
@@ -23,14 +25,15 @@ class Category extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ display: 'block', padding: 30 }}>
         <CardGroup>
           {this.state.articles.map((article, i) => (
             <Card key={i} {...article}></Card>
           ))}
         </CardGroup>
+       
       </div>
     );
   }
 }
-export default Category;
+export default category;

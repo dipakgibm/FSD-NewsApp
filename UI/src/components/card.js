@@ -36,5 +36,6 @@ const Card = ({ title, urlToImage, content, url }) => {
       </BootCard.Footer>
     </BootCard>
   );
+  
 };
 export default Card;

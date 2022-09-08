@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { CardGroup } from "react-bootstrap";
 import Card from "./card";
 import { NewsService } from "../services/newsServices";
-import pagination from "./pagination"
-
 
 class dashboard extends React.Component {
   constructor(props) {
@@ -23,17 +21,38 @@ class dashboard extends React.Component {
     });
   }
 
+   handledPreviousClick = async()=>{
+    console.log("previous button clicked")
+
+  }
+
+  handledNextClick = async ()=>{
+
+    this.newsService.getDashboardArticles("in",this.state.page+1).then((data) => {
+      this.setState({
+        page:this.state.page +1,
+        articles: data.articles,
+      }
+
+  }
+
+
+
   render() {
     return (
-      <div style={{ display: 'block', padding: 30 }}>
+      <div>
         <CardGroup>
           {this.state.articles.map((article, i) => (
             <Card key={i} {...article}></Card>
           ))}
         </CardGroup>
+        
        
       </div>
+
     );
+
   }
+
 }
 export default dashboard;
