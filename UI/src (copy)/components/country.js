@@ -5,7 +5,7 @@ import { NewsService } from "../services/newsServices";
 import pagination from "./pagination"
 
 
-class dashboard extends React.Component {
+class category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ class dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.newsService.getDashboardArticles("in").then((data) => {
+    this.newsService.getDashboardArticles(this.props.countries).then((data) => {
       this.setState({
         articles: data.articles,
       });
@@ -36,4 +36,4 @@ class dashboard extends React.Component {
     );
   }
 }
-export default dashboard;
+export default category;

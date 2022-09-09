@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { CardGroup } from "react-bootstrap";
 import Card from "./card";
 import { NewsService } from "../services/newsServices";
-import pagination from "./pagination"
 
 
 class dashboard extends React.Component {
@@ -15,7 +14,7 @@ class dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.newsService.getDashboardArticles("in").then((data) => {
+    this.newsService.getArticles(this.props.categories).then((data) => {
       this.setState({
         articles: data.articles,
       });

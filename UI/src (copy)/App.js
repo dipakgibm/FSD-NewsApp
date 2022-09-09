@@ -15,7 +15,7 @@ import Category from "./components/category"
 import Country from "./components/country"
 import Dashboard from "./components/dashboard";
 import SearchByContent from "./components/SearchByContent";
-
+import SearchByDate from "./components/SearchByDate";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { BrowserRouter, Routes,Navigate } from "react-router-dom";
 import Source from "./components/source"
@@ -112,12 +112,12 @@ class App extends Component {
 
             {
                     <DropdownButton id="dropdown-basic-button" title="Category"  >
-                    <Dropdown.Item href="/category/business">Business</Dropdown.Item>
-                    <Dropdown.Item href="/category/sports">Sports</Dropdown.Item>
-                    <Dropdown.Item href="/category/entertainment">Entertainment</Dropdown.Item>
-                    <Dropdown.Item href="/category/science">Science</Dropdown.Item>
-                    <Dropdown.Item href="/category/health">Health</Dropdown.Item>
-                    <Dropdown.Item href="/category/technology">Technology</Dropdown.Item>
+                    <Dropdown.Item href="/business">Business</Dropdown.Item>
+                    <Dropdown.Item href="/sports">Sports</Dropdown.Item>
+                    <Dropdown.Item href="/entertainment">Entertainment</Dropdown.Item>
+                    <Dropdown.Item href="/science">Science</Dropdown.Item>
+                    <Dropdown.Item href="/health">Health</Dropdown.Item>
+                    <Dropdown.Item href="/technology">Technology</Dropdown.Item>
                   </DropdownButton>
             }
              {
@@ -143,14 +143,14 @@ class App extends Component {
                     <Dropdown.Item href="/source/thenextweb">The Next Web</Dropdown.Item>
                   </DropdownButton>
             }
-{/* 
+
            {
                     <DropdownButton id="dropdown-basic-button" title="Search"  >
                     <Dropdown.Item href="/search/content">Contents</Dropdown.Item>
                     <Dropdown.Item href="/search/date">Date</Dropdown.Item>
                     
                   </DropdownButton>
-            } */}
+            }
 
             {dashboard && (
               <li className="nav-item">
@@ -238,14 +238,14 @@ class App extends Component {
             <Route exact path="/admin" component={BoardAdmin} />
             <Route exact path="/bookmark" component={<Bookmark/>} />
             <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/search" component={SearchByContent} />
-            
-            <Route exact path="/category/business"><Category categories="business" /></Route> 
-            <Route exact path="/category/sports"><Category categories="sports" /></Route> 
-            <Route exact path="/category/entertainment"><Category categories="entertainment" /></Route> 
-            <Route exact path="/category/science"><Category categories="science" /></Route> 
-            <Route exact path="/category/health"><Category categories="health" /></Route> 
-            <Route exact path="/category/technology"><Category categories="technology" /></Route> 
+            <Route exact path="/search/content" component={SearchByContent} />
+            <Route exact path="/search/date" component={SearchByDate} />
+            <Route exact path="/business"><Category categories="business" /></Route> 
+            <Route exact path="/sports"><Category categories="sports" /></Route> 
+            <Route exact path="/entertainment"><Category categories="entertainment" /></Route> 
+            <Route exact path="/science"><Category categories="science" /></Route> 
+            <Route exact path="/health"><Category categories="health" /></Route> 
+            <Route exact path="/technology"><Category categories="technology" /></Route> 
             <Route exact path="/country/in"><Country countries="in" /></Route> 
             <Route exact path="/country/gb"><Country countries="gb" /></Route> 
             <Route exact path="/country/fr"><Country countries="fr" /></Route> 
