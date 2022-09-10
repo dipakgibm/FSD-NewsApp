@@ -4,7 +4,7 @@ import  Card  from "./card";
 import { NewsService } from "../services/newsServices";
 import axios from 'axios'
 
-class Search extends React.Component {
+class SearchByContent extends React.Component {
   apikey = "89009dda8a5449ecbe90dc7a25510b8a"
   api = "https://newsapi.org/v2";
   top_enpoint = "/top-headlines";
@@ -77,4 +77,4 @@ class Search extends React.Component {
     );
   }
 }
-export default Search;
+export default SearchByContent;
