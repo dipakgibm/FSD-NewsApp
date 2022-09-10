@@ -4,6 +4,8 @@ import Card from "./card";
 import { NewsService } from "../services/newsServices";
 import axios from "axios";
 import Pagination from "react-js-pagination";
+// require("bootstrap/less/bootstrap.less");
+
 
 
 class dashboard extends React.Component {
@@ -12,6 +14,7 @@ class dashboard extends React.Component {
     this.state = {
       articles: [],
       activePage: 1,
+      totalResults:0,
       
     };
     this.newsService = new NewsService();
@@ -21,26 +24,20 @@ class dashboard extends React.Component {
     this.newsService.getDashboardArticles("in").then((data) => {
       this.setState({
         articles: data.articles,
+        totalResults:data.totalResults,
       });
-      console.log(data.articles);
+      console.log(`Data: ${data.articles}`);
+      console.log(`TotalPage count: ${data.totalResults}`)
     });
   }
 
   handlePageChange = pageNumber => {
     console.log(`active page is ${pageNumber}`);
-    // console.log(`active page is ${data.totalResults}`);
-    // axios
-    //   .get(
-    //     `https://jsonplaceholder.typicode.com/posts?_page=${pageNumber}&_limit=20`
-    //   )
-    //   .then(res => {
-    //     this.setState({
-    //       data: res.data
-    //     });
-    //   });
+    
     this.newsService.getAllArticle("in",pageNumber).then((data) => {
       this.setState({
         articles: data.articles,
+        totalResults:data.totalResults,
       });
       console.log(data.articles);
     });
@@ -49,6 +46,7 @@ class dashboard extends React.Component {
   };
 
   render() {
+    const{totalResults}=this.state;
     return (
       <div style={{ display: 'block', padding: 30 }}>
         <CardGroup>
@@ -56,13 +54,17 @@ class dashboard extends React.Component {
             <Card key={i} {...article}></Card>
           ))}
         </CardGroup>
+        <div className="paginations"> 
         <Pagination
-          totalItemsCount={450}
+          totalItemsCount={totalResults}
           onChange={this.handlePageChange}
           activePage={this.state.activePage}
-          itemsCountPerPage={10}
-          pageRangeDisplayed={5}
+          itemsCountPerPage={6}
+          pageRangeDisplayed={6}
+          itemClass="page-item"
+          linkClass="page-link"
         />
+        </div>
       </div>
     );
   }
