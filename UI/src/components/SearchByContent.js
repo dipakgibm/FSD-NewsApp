@@ -2,7 +2,8 @@ import React from "react";
 import { CardGroup } from "react-bootstrap";
 import  Card  from "./card";
 import { NewsService } from "../services/newsServices";
-import axios from 'axios'
+import axios from "axios";
+import Pagination from "react-js-pagination";
 
 class SearchByContent extends React.Component {
   apikey = "89009dda8a5449ecbe90dc7a25510b8a"
@@ -14,20 +15,45 @@ class SearchByContent extends React.Component {
       query: '',
       error: false,
       articles: [],
+      activePage: 1,
+      totalResults: 0,
     };
     this.newsServices = new NewsService();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  getInfo = () => {
-    axios.get(`${this.api}/everything?q=${this.state.query}&apiKey=${this.apikey}&language=en`)
+
+  
+  getInfo = (page) => {
+    axios.get(`${this.api}/everything?q=${this.state.query}&apiKey=${this.apikey}&language=en&page=${page}&pageSize=6`)
       .then(({ data }) => {
         this.setState({
-          articles: data.articles                            
+          articles: data.articles,     
+          totalResults: data.totalResults,                     
         })
-        console.log(data.articles);
+        console.log(`Data: ${data.articles}`);
+        console.log(`TotalPage count: ${data.totalResults}`)
       })
       .catch(() => this.setState({ error: true }))
   }
+
+
+  handlePageChange = pageNumber => {
+    console.log(`active page is ${pageNumber}`);
+
+    axios.get(`${this.api}/everything?q=${this.state.query}&apiKey=${this.apikey}&language=en&page=${pageNumber}&pageSize=6`)
+      .then(({ data }) => {
+        this.setState({
+          articles: data.articles,     
+          totalResults: data.totalResults,                     
+        })
+        console.log(`Data: ${data.articles}`);
+        console.log(`TotalPage count: ${data.totalResults}`)
+      })
+      .catch(() => this.setState({ error: true }))
+
+    this.setState({ activePage: pageNumber });
+  };
+
 
   handleInputChange = () => {
     this.setState({
@@ -57,6 +83,7 @@ class SearchByContent extends React.Component {
   }
   
   render() {
+    const { totalResults } = this.state;
     return (
       <div>
          <form onSubmit={this.handleSubmit}>
@@ -73,6 +100,18 @@ class SearchByContent extends React.Component {
             <Card key={i} {...article}></Card>
           ))}
         </CardGroup>
+
+        <div className="paginations">
+          <Pagination
+            totalItemsCount={totalResults}
+            onChange={this.handlePageChange}
+            activePage={this.state.activePage}
+            itemsCountPerPage={6}
+            pageRangeDisplayed={6}
+            itemClass="page-item"
+            linkClass="page-link"
+          />
+      </div>
       </div>
     );
   }
