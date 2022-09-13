@@ -31,7 +31,7 @@ const Card = ({ title, urlToImage, content, url }) => {
       </BootCard.Body>
       <BootCard.Footer>
         <Button variant="gray" onClick={handleAddToReadLater}>
-          Read Later
+          Bookmark
         </Button>
       </BootCard.Footer>
     </BootCard>

@@ -189,7 +189,7 @@ class App extends Component {
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
                   User
-                </Link>\\
+                </Link>
 
                 
               </li>
