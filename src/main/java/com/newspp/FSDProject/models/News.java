@@ -16,7 +16,9 @@ public class News {
     @Column(name="news_id")
     private int newsId;
     //news data
-    private String userId;
+//    private String userId;
+
+
     private String id;
     private String title;
     private String author;
@@ -80,15 +82,5 @@ public class News {
         return urlToImage;
     }
 
-    public void setUrlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
-    }
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
 }

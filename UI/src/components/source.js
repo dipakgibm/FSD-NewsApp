@@ -43,14 +43,17 @@ class source extends React.Component {
   };
 
   render() {
-    const { totalResults } = this.state;
-    return (
-      <div style={{ display: 'block', padding: 30 }}>
-        <CardGroup>
-          {this.state.articles.map((article, i) => (
-            <Card key={i} {...article}></Card>
-          ))}
-        </CardGroup>
+    const { totalResults,articles } = this.state;
+    return (<div className="container">
+                         
+    <div className="row">
+        {articles.map((element) => {
+            return <div className="col-md-4" key={element.url}>
+                <Card title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
+            </div>
+        })}
+    </div>
+    
         <div className="paginations">
           <Pagination
             totalItemsCount={totalResults}

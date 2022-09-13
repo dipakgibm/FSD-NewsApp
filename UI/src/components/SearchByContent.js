@@ -83,7 +83,7 @@ class SearchByContent extends React.Component {
   }
   
   render() {
-    const { totalResults } = this.state;
+    const { totalResults,articles } = this.state;
     return (
       <div>
          <form onSubmit={this.handleSubmit}>
@@ -95,11 +95,13 @@ class SearchByContent extends React.Component {
          <input type="submit" value="Search" />
         
       </form>
-        <CardGroup>
-          {this.state.articles.map((article, i) => (
-            <Card key={i} {...article}></Card>
-          ))}
-        </CardGroup>
+      <div className="row">
+        {articles.map((element) => {
+            return <div className="col-md-4" key={element.url}>
+                <Card title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
+            </div>
+        })}
+    </div>
 
         <div className="paginations">
           <Pagination

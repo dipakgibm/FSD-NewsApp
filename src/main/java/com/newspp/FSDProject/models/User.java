@@ -1,6 +1,7 @@
 package com.newspp.FSDProject.models;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -37,6 +38,10 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
+
+  @OneToMany(targetEntity = News.class,cascade = CascadeType.ALL)
+  @JoinColumn(name="un_fk",referencedColumnName = "id")
+  private List<News> news;
 
   public User() {
   }

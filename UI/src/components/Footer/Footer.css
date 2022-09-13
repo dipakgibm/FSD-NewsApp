@@ -13,6 +13,7 @@ footer {
     justify-content: center;
     margin: 5rem auto;
     text-align: center;
+    
 }
 
 .github {
@@ -104,6 +105,7 @@ a.button.btn-light.medium:hover {
     padding: 20px;
     float: none;
 }
+
 
 .copyright {
     box-shadow: 0 10px 35px rgba(0, 0, 0, .3);
