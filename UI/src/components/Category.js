@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import { CardGroup } from "react-bootstrap";
-import Card from "./card";
+import Card from "./Card";
 import { NewsService } from "../services/newsServices";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 
-class source extends React.Component {
+
+
+
+class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       articles: [],
       activePage: 1,
-      totalResults: 0,
-
+      totalResults:0,
+      
     };
     this.newsService = new NewsService();
   }
 
   componentDidMount() {
-    this.newsService.getArticlesBySource(this.props.domains).then((data) => {
+    this.newsService.getArticlesByCategory(this.props.categories).then((data) => {
       this.setState({
         articles: data.articles,
-        totalResults: data.totalResults,
+        totalResults:data.totalResults,
       });
       console.log(`Data: ${data.articles}`);
       console.log(`TotalPage count: ${data.totalResults}`)
@@ -30,11 +33,11 @@ class source extends React.Component {
 
   handlePageChange = pageNumber => {
     console.log(`active page is ${pageNumber}`);
-
-    this.newsService.getArticlesBySource(this.props.domains, pageNumber).then((data) => {
+    
+    this.newsService.getArticlesByCategory(this.props.categories,pageNumber).then((data) => {
       this.setState({
         articles: data.articles,
-        totalResults: data.totalResults,
+        totalResults:data.totalResults,
       });
       console.log(data.articles);
     });
@@ -54,19 +57,19 @@ class source extends React.Component {
         })}
     </div>
     
-        <div className="paginations">
-          <Pagination
-            totalItemsCount={totalResults}
-            onChange={this.handlePageChange}
-            activePage={this.state.activePage}
-            itemsCountPerPage={6}
-            pageRangeDisplayed={6}
-            itemClass="page-item"
-            linkClass="page-link"
-          />
+        <div className="paginations"> 
+        <Pagination
+          totalItemsCount={totalResults}
+          onChange={this.handlePageChange}
+          activePage={this.state.activePage}
+          itemsCountPerPage={6}
+          pageRangeDisplayed={6}
+          itemClass="page-item"
+          linkClass="page-link"
+        />
         </div>
       </div>
     );
   }
 }
-export default source;
+export default Category;

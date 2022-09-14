@@ -3,22 +3,21 @@ import { Switch, Route, Link,Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import AuthService from "./services/auth.service";
-import Login from "./components/login.component";
-import Register from "./components/register.component";
-import Home from "./components/home.component";
-import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
-import BoardAdmin from "./components/board-admin.component";
-import Bookmark from "./components/board-bookmark.component"; 
-import Category from "./components/category"
-import Country from "./components/country"
-import Dashboard from "./components/dashboard";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Home from "./components/Home";
+import Profile from "./components/Profile";
+
+import BoardAdmin from "./components/Admin";
+import Bookmark from "./components/Bookmark"; 
+import Category from "./components/Category"
+import Country from "./components/Country"
+import Dashboard from "./components/Dashboard";
 import SearchByContent from "./components/SearchByContent";
 
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { BrowserRouter, Routes,Navigate } from "react-router-dom";
-import Source from "./components/source"
+import Source from "./components/Source"
 import Footer from "./components/Footer/Footer"
 
 
@@ -83,35 +82,35 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-primary">
+        <nav className="navbar navbar-expand navbar-dark bg-secondary">
           <Link to={"/"} className="navbar-brand">
             News App
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
+              <a href={"/home"} className="nav-link">
                 Home
-              </Link>
+              </a>
             </li>
             
             {search && (
               <li className="nav-item">
-                <Link to={"/search"} className="nav-link">
+                <a href={"/search"} className="nav-link">
                   Search
-                </Link>
+                </a>
               </li>
             )}
 
             {bookmark && (
               <li className="nav-item">
-                <Link to={"/bookmark"} className="nav-link">
+                <a href={"/bookmark"} className="nav-link">
                   Bookmark
-                </Link>
+                </a>
               </li>
             )}
 
             {
-                    <DropdownButton id="dropdown-basic-button" title="Category"  >
+                    <DropdownButton id="dropdown-basic-button" title="Category" variant="secondary" >
                     <Dropdown.Item href="/category/business">Business</Dropdown.Item>
                     <Dropdown.Item href="/category/sports">Sports</Dropdown.Item>
                     <Dropdown.Item href="/category/entertainment">Entertainment</Dropdown.Item>
@@ -121,7 +120,7 @@ class App extends Component {
                   </DropdownButton>
             }
              {
-                    <DropdownButton id="dropdown-basic-button" title="Country"  >
+                    <DropdownButton id="dropdown-basic-button" title="Country" variant="secondary" >
                     <Dropdown.Item href="/country/in">India</Dropdown.Item>
                     <Dropdown.Item href="/country/us">USA</Dropdown.Item>
                     <Dropdown.Item href="/country/gb">United Kinkgdom</Dropdown.Item>
@@ -133,7 +132,7 @@ class App extends Component {
             }
 
              {
-                    <DropdownButton id="dropdown-basic-button" title="Source"  >
+                    <DropdownButton id="dropdown-basic-button" title="Source" variant="secondary">
                     <Dropdown.Item href="/source/bbc">BBC</Dropdown.Item>
                     <Dropdown.Item href="/source/wsj">Wall Street</Dropdown.Item>
                     <Dropdown.Item href="/source/techcrunch">Tech Crunch</Dropdown.Item>
@@ -143,57 +142,8 @@ class App extends Component {
                     <Dropdown.Item href="/source/thenextweb">The Next Web</Dropdown.Item>
                   </DropdownButton>
             }
-{/* 
-           {
-                    <DropdownButton id="dropdown-basic-button" title="Search"  >
-                    <Dropdown.Item href="/search/content">Contents</Dropdown.Item>
-                    <Dropdown.Item href="/search/date">Date</Dropdown.Item>
-                    
-                  </DropdownButton>
-            } */}
 
-            {dashboard && (
-              <li className="nav-item">
-                <Link to={"/dashboard"} className="nav-link">
-                  Dashboard
-                </Link>
-              </li>
-            )}
-
-            {/* {card && (
-              <li className="nav-item">
-                <Link to={"/card"} className="nav-link">
-                  Card
-                </Link>
-              </li>
-            )} */}
-
-            {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )}
-
-
-            {currentUser && (
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-
-                
-              </li>
-            )}
+         
           </div>
 
           {currentUser ? (
@@ -205,22 +155,22 @@ class App extends Component {
               </li>
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
+                  Logout
                 </a>
               </li>
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
+                <a href ={"/login"} className="nav-link">
                   Login
-                </Link>
+                </a>
               </li>
 
               <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
+                <a href={"/register"} className="nav-link">
                   Sign Up
-                </Link>
+                </a>
               </li>
             </div>
           )}
@@ -229,12 +179,13 @@ class App extends Component {
         <div className="container mt-3">
         <BrowserRouter>
                 {/* <route> */}
+                
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/user" component={BoardUser} />
-            <Route exact path="/mod" component={BoardModerator} />
+
+
             <Route exact path="/admin" component={BoardAdmin} />
             <Route exact path="/bookmark" component={<Bookmark/>} />
             <Route exact path="/dashboard" component={Dashboard} />
@@ -262,11 +213,9 @@ class App extends Component {
             <Route exact path="/source/thenextweb"><Source domains="thenextweb.com" /></Route> 
             <Footer/>
 
-
-</BrowserRouter>
+              </BrowserRouter>
         </div>
 
-        { /*<AuthVerify logOut={this.logOut}/> */ }
       </div>
     );
   }

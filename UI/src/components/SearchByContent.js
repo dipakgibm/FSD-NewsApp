@@ -1,6 +1,6 @@
 import React from "react";
 import { CardGroup } from "react-bootstrap";
-import  Card  from "./card";
+import  Card  from "./Card";
 import { NewsService } from "../services/newsServices";
 import axios from "axios";
 import Pagination from "react-js-pagination";
