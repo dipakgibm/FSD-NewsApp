@@ -19,6 +19,7 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 import { BrowserRouter, Routes,Navigate } from "react-router-dom";
 import Source from "./components/Source"
 import Footer from "./components/Footer/Footer"
+import ProtectedRoute from "./components/ProtectedRoute"
 
 
 // import AuthVerify from "./common/auth-verify";
@@ -46,7 +47,7 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: AuthService.getCurrentUser(),
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+        
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
         bookmark: user,
         source:user,
@@ -93,7 +94,7 @@ class App extends Component {
               </a>
             </li>
             
-            {search && (
+            {(
               <li className="nav-item">
                 <a href={"/search"} className="nav-link">
                   Search
@@ -101,7 +102,7 @@ class App extends Component {
               </li>
             )}
 
-            {bookmark && (
+            {(
               <li className="nav-item">
                 <a href={"/bookmark"} className="nav-link">
                   Bookmark
@@ -186,12 +187,13 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
 
 
-            <Route exact path="/admin" component={BoardAdmin} />
-            <Route exact path="/bookmark" component={<Bookmark/>} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/search" component={SearchByContent} />
             
-            <Route exact path="/category/business"><Category categories="business" /></Route> 
+            <ProtectedRoute exact path="/bookmark" component={<Bookmark/>} />
+            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+            
+            <ProtectedRoute exact path="/search" component={SearchByContent} />
+
+            <Route exact path="/category/business">< Category categories="business" /></Route>
             <Route exact path="/category/sports"><Category categories="sports" /></Route> 
             <Route exact path="/category/entertainment"><Category categories="entertainment" /></Route> 
             <Route exact path="/category/science"><Category categories="science" /></Route> 
@@ -211,6 +213,8 @@ class App extends Component {
             <Route exact path="/source/reuters"><Source domains="reuters.com" /></Route> 
             <Route exact path="/source/washingtonpost"><Source domains="washingtonpost.com" /></Route> 
             <Route exact path="/source/thenextweb"><Source domains="thenextweb.com" /></Route> 
+            
+
             <Footer/>
 
               </BrowserRouter>

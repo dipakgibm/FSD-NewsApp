@@ -58,13 +58,7 @@ export default class Login extends Component {
           this.props.history.push("/dashboard");
           window.location.reload();
         },
-        // error => {
-        //   const resMessage =
-        //     (error.response &&
-        //       error.response.data &&
-        //       error.response.data.message) ||
-        //     error.message ||
-        //     error.toString();
+       
 
                 error => {
           const resMessage ="Please enter valid username and password";
