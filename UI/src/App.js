@@ -38,6 +38,7 @@ class App extends Component {
       source:undefined,
       dashboard:undefined,
       search:undefined,
+      home:undefined,
     };
   }
 
@@ -181,17 +182,38 @@ class App extends Component {
         <BrowserRouter>
                 {/* <route> */}
                 
-            <Route exact path={["/", "/home"]} component={Home} />
+            <ProtectedRoute exact path={["/", "/home"]} component={Dashboard} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
-
-
-            
             <ProtectedRoute exact path="/bookmark" component={<Bookmark/>} />
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-            
             <ProtectedRoute exact path="/search" component={SearchByContent} />
+            
+            {/* Protected Category */}
+            <ProtectedRoute exact path="/category/business" component={Category} />
+            <ProtectedRoute exact path="/category/sports" component={Category} />
+            <ProtectedRoute exact path="/category/entertainment" component={Category} />
+            <ProtectedRoute exact path="/category/science" component={Category} />
+            <ProtectedRoute exact path="/category/health" component={Category} />
+            <ProtectedRoute exact path="/category/technology" component={Category} />
+            {/* Protected Source */}
+            <ProtectedRoute exact path="/source/bbc" component={Source} />
+            <ProtectedRoute exact path="/source/wsg" component={Source} />
+            <ProtectedRoute exact path="/source/techcrunch" component={Source} />
+            <ProtectedRoute exact path="/source/cnn" component={Source} />
+            <ProtectedRoute exact path="/source/reuters" component={Source} />
+            <ProtectedRoute exact path="/source/washingtonpost" component={Source} />
+            <ProtectedRoute exact path="/source/thenextweb" component={Source} />
+            {/* Protected Country */}
+            <ProtectedRoute exact path="/country/in" component={Country} />
+            <ProtectedRoute exact path="/country/gb" component={Country} />
+            <ProtectedRoute exact path="/country/fr" component={Country} />
+            <ProtectedRoute exact path="/country/cn" component={Country} />
+            <ProtectedRoute exact path="/country/ua" component={Country} />
+            <ProtectedRoute exact path="/country/ru" component={Country} />
+            <ProtectedRoute exact path="/country/us" component={Country} />
+
 
             <Route exact path="/category/business">< Category categories="business" /></Route>
             <Route exact path="/category/sports"><Category categories="sports" /></Route> 
