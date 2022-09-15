@@ -8,7 +8,7 @@ import Pagination from "react-js-pagination";
 
 
 
-class Category extends React.Component {
+class Country extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,7 +21,7 @@ class Category extends React.Component {
   }
 
   componentDidMount() {
-    this.newsService.getArticlesByCategory(this.props.categories).then((data) => {
+    this.newsService.getAllArticle(this.props.countries).then((data) => {
       this.setState({
         articles: data.articles,
         totalResults:data.totalResults,
@@ -34,7 +34,7 @@ class Category extends React.Component {
   handlePageChange = pageNumber => {
     console.log(`active page is ${pageNumber}`);
     
-    this.newsService.getArticlesByCategory(this.props.categories,pageNumber).then((data) => {
+    this.newsService.getAllArticle(this.props.countries,pageNumber).then((data) => {
       this.setState({
         articles: data.articles,
         totalResults:data.totalResults,
@@ -72,4 +72,4 @@ class Category extends React.Component {
     );
   }
 }
-export default Category;
+export default Country;
