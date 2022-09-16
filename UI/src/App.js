@@ -1,26 +1,23 @@
 import React, { Component } from "react";
-import { Switch, Route, Link,Router } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+
 import AuthService from "./services/auth.service";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Home from "./components/Home";
-import Profile from "./components/Profile";
 
-import BoardAdmin from "./components/Admin";
-import Bookmark from "./components/Bookmark"; 
-import Category from "./components/Category"
-import Country from "./components/Country"
-import Dashboard from "./components/Dashboard";
-import SearchByContent from "./components/SearchByContent";
-
-import { Dropdown, DropdownButton } from "react-bootstrap";
-import { BrowserRouter, Routes,Navigate } from "react-router-dom";
-import Source from "./components/Source"
-import Footer from "./components/Footer/Footer"
-import ProtectedRoute from "./components/ProtectedRoute"
-
+import Login from "./components/login.component";
+import Register from "./components/register.component";
+import Home from "./components/home.component";
+import Profile from "./components/profile.component";
+import BoardUser from "./components/board-user.component";
+import BoardModerator from "./components/board-moderator.component";
+import BoardAdmin from "./components/board-admin.component";
+import Bookmark from "./components/board-bookmark.component"; 
+import Source from "./components/board-source.component"
+import Dashboard from "./components/dashboard";
+import Card from "./components/card";
+import Search from "./components/Search";
+ 
 
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
@@ -38,7 +35,6 @@ class App extends Component {
       source:undefined,
       dashboard:undefined,
       search:undefined,
-      home:undefined,
     };
   }
 
@@ -48,7 +44,7 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: AuthService.getCurrentUser(),
-        
+        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
         showAdminBoard: user.roles.includes("ROLE_ADMIN"),
         bookmark: user,
         source:user,
@@ -80,72 +76,85 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard,bookmark,dashboard,search } = this.state;
+    const { currentUser, showModeratorBoard, showAdminBoard,bookmark,source,dashboard,search } = this.state;
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-secondary">
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
             News App
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a href={"/home"} className="nav-link">
+              <Link to={"/home"} className="nav-link">
                 Home
-              </a>
+              </Link>
             </li>
             
-            {(
+            {search && (
               <li className="nav-item">
-                <a href={"/search"} className="nav-link">
+                <Link to={"/search"} className="nav-link">
                   Search
-                </a>
+                </Link>
               </li>
             )}
 
-            {(
+            {bookmark && (
               <li className="nav-item">
-                <a href={"/bookmark"} className="nav-link">
+                <Link to={"/bookmark"} className="nav-link">
                   Bookmark
-                </a>
+                </Link>
               </li>
             )}
 
-            {
-                    <DropdownButton id="dropdown-basic-button" title="Category" variant="secondary" >
-                    <Dropdown.Item href="/category/business">Business</Dropdown.Item>
-                    <Dropdown.Item href="/category/sports">Sports</Dropdown.Item>
-                    <Dropdown.Item href="/category/entertainment">Entertainment</Dropdown.Item>
-                    <Dropdown.Item href="/category/science">Science</Dropdown.Item>
-                    <Dropdown.Item href="/category/health">Health</Dropdown.Item>
-                    <Dropdown.Item href="/category/technology">Technology</Dropdown.Item>
-                  </DropdownButton>
-            }
-             {
-                    <DropdownButton id="dropdown-basic-button" title="Country" variant="secondary" >
-                    <Dropdown.Item href="/country/in">India</Dropdown.Item>
-                    <Dropdown.Item href="/country/us">USA</Dropdown.Item>
-                    <Dropdown.Item href="/country/gb">United Kinkgdom</Dropdown.Item>
-                    <Dropdown.Item href="/country/fr">France</Dropdown.Item>
-                    <Dropdown.Item href="/country/cn">China</Dropdown.Item>
-                    <Dropdown.Item href="/country/ua">Ukraine</Dropdown.Item>
-                    <Dropdown.Item href="/country/ru">Russia</Dropdown.Item>
-                  </DropdownButton>
-            }
+            {source && (
+              <li className="nav-item">
+                <Link to={"/source"} className="nav-link">
+                  Source
+                </Link>
+              </li>
+            )}
 
-             {
-                    <DropdownButton id="dropdown-basic-button" title="Source" variant="secondary">
-                    <Dropdown.Item href="/source/bbc">BBC</Dropdown.Item>
-                    <Dropdown.Item href="/source/wsj">Wall Street</Dropdown.Item>
-                    <Dropdown.Item href="/source/techcrunch">Tech Crunch</Dropdown.Item>
-                    <Dropdown.Item href="/source/cnn">CNN</Dropdown.Item>
-                    <Dropdown.Item href="/source/reuters">Reuters</Dropdown.Item>
-                    <Dropdown.Item href="/source/washingtonpost">Washington Post</Dropdown.Item>
-                    <Dropdown.Item href="/source/thenextweb">The Next Web</Dropdown.Item>
-                  </DropdownButton>
-            }
+            {dashboard && (
+              <li className="nav-item">
+                <Link to={"/dashboard"} className="nav-link">
+                  Dashboard
+                </Link>
+              </li>
+            )}
 
-         
+            {/* {card && (
+              <li className="nav-item">
+                <Link to={"/card"} className="nav-link">
+                  Card
+                </Link>
+              </li>
+            )} */}
+
+            {showModeratorBoard && (
+              <li className="nav-item">
+                <Link to={"/mod"} className="nav-link">
+                  Moderator Board
+                </Link>
+              </li>
+            )}
+
+            {showAdminBoard && (
+              <li className="nav-item">
+                <Link to={"/admin"} className="nav-link">
+                  Admin Board
+                </Link>
+              </li>
+            )}
+
+
+            {currentUser && (
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  User
+                </Link>
+              </li>
+            )}
           </div>
 
           {currentUser ? (
@@ -157,91 +166,46 @@ class App extends Component {
               </li>
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
-                  Logout
+                  LogOut
                 </a>
               </li>
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a href ={"/login"} className="nav-link">
+                <Link to={"/login"} className="nav-link">
                   Login
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
-                <a href={"/register"} className="nav-link">
+                <Link to={"/register"} className="nav-link">
                   Sign Up
-                </a>
+                </Link>
               </li>
             </div>
           )}
         </nav>
 
         <div className="container mt-3">
-        <BrowserRouter>
-                {/* <route> */}
-                
-            <ProtectedRoute exact path={["/", "/home"]} component={Dashboard} />
+          <Switch>
+            <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
-            <ProtectedRoute exact path="/bookmark" component={<Bookmark/>} />
-            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
-            <ProtectedRoute exact path="/search" component={SearchByContent} />
-            
-            {/* Protected Category */}
-            <ProtectedRoute exact path="/category/business" component={Category} />
-            <ProtectedRoute exact path="/category/sports" component={Category} />
-            <ProtectedRoute exact path="/category/entertainment" component={Category} />
-            <ProtectedRoute exact path="/category/science" component={Category} />
-            <ProtectedRoute exact path="/category/health" component={Category} />
-            <ProtectedRoute exact path="/category/technology" component={Category} />
-            {/* Protected Source */}
-            <ProtectedRoute exact path="/source/bbc" component={Source} />
-            <ProtectedRoute exact path="/source/wsg" component={Source} />
-            <ProtectedRoute exact path="/source/techcrunch" component={Source} />
-            <ProtectedRoute exact path="/source/cnn" component={Source} />
-            <ProtectedRoute exact path="/source/reuters" component={Source} />
-            <ProtectedRoute exact path="/source/washingtonpost" component={Source} />
-            <ProtectedRoute exact path="/source/thenextweb" component={Source} />
-            {/* Protected Country */}
-            <ProtectedRoute exact path="/country/in" component={Country} />
-            <ProtectedRoute exact path="/country/gb" component={Country} />
-            <ProtectedRoute exact path="/country/fr" component={Country} />
-            <ProtectedRoute exact path="/country/cn" component={Country} />
-            <ProtectedRoute exact path="/country/ua" component={Country} />
-            <ProtectedRoute exact path="/country/ru" component={Country} />
-            <ProtectedRoute exact path="/country/us" component={Country} />
+            <Route path="/user" component={BoardUser} />
+            <Route path="/mod" component={BoardModerator} />
+            <Route path="/admin" component={BoardAdmin} />
+            <Route path="/bookmark" component={Bookmark} />
+            <Route path="/source" component={Source} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/search" component={Search} />
+            {/* <Navbar.Brand href="/Search">Search</Navbar.Brand> */}
 
-
-            <Route exact path="/category/business">< Category categories="business" /></Route>
-            <Route exact path="/category/sports"><Category categories="sports" /></Route> 
-            <Route exact path="/category/entertainment"><Category categories="entertainment" /></Route> 
-            <Route exact path="/category/science"><Category categories="science" /></Route> 
-            <Route exact path="/category/health"><Category categories="health" /></Route> 
-            <Route exact path="/category/technology"><Category categories="technology" /></Route> 
-            <Route exact path="/country/in"><Country countries="in" /></Route> 
-            <Route exact path="/country/gb"><Country countries="gb" /></Route> 
-            <Route exact path="/country/fr"><Country countries="fr" /></Route> 
-            <Route exact path="/country/cn"><Country countries="cn" /></Route> 
-            <Route exact path="/country/ua"><Country countries="ua" /></Route> 
-            <Route exact path="/country/ru"><Country countries="ru" /></Route> 
-            <Route exact path="/country/us"><Country countries="us" /></Route> 
-            <Route exact path="/source/bbc"><Source domains="bbc.com" /></Route> 
-            <Route exact path="/source/wsj"><Source domains="wsj.com" /></Route> 
-            <Route exact path="/source/techcrunch"><Source domains="techcrunch.com" /></Route> 
-            <Route exact path="/source/cnn"><Source domains="cnn.com" /></Route> 
-            <Route exact path="/source/reuters"><Source domains="reuters.com" /></Route> 
-            <Route exact path="/source/washingtonpost"><Source domains="washingtonpost.com" /></Route> 
-            <Route exact path="/source/thenextweb"><Source domains="thenextweb.com" /></Route> 
-            
-
-            <Footer/>
-
-              </BrowserRouter>
+          </Switch>
         </div>
 
+        { /*<AuthVerify logOut={this.logOut}/> */ }
       </div>
     );
   }

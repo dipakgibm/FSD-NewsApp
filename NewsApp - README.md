@@ -5,29 +5,36 @@ Build a system to search for news article, open the article, add article to favo
 
 ## Requirements
 The application needs to fetch news article data by registering with the following API link and get API Key required to call the API.
-https://newsapi.org/
+https://newsapi.org/   
+##Completed
 
 	-Example API:
 	https://newsapi.org/v2/everything?q=bitcoin&from=2019-01-06&sortBy=publishedAt&apiKey=b170738ea8d145159da715566679a48fea
 
 	- A frontend where the user can register/login to the application. The login page should have a link for registration using which the user
 	should be able to register. On Successful registration the user should be taken to the login page.
-	
+##Completed
+
 	- Proper navigation links for all the pages should be
 	available within pages
+## Add CSS property to fix navbar
 
 	- Error handling should be implemented across pages.
 	Appropriate messages should be displayed for the same. Success
 	messages should be displayed for the User Registration.
+## Completed (Favorite remain)
 
 	- Logout feature should be implemented.
+## Completed
 
-**User can add an article to favourite/bookamark list and should be able to view the favourite/bookmark list.**
+**User can add an article to favourite/bookmark list and should be able to view the favourite/bookmark list.**
+## Remaining
+
 
 ## Modules
 ### UI (User interface) - should be able to
-1. List common News articles with **pagination**
-2. View or open an article from the list
+1. List common News articles with **pagination**  
+2. View or open an article from the list      
 3. Search for a news article
 4. Add an article into favourite/bookmark list
 5. View favourite/bookmark articles with **pagination**

@@ -55,10 +55,16 @@ export default class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
         () => {
-          this.props.history.push("/dashboard");
+          this.props.history.push("/profile");
           window.location.reload();
         },
-       
+        // error => {
+        //   const resMessage =
+        //     (error.response &&
+        //       error.response.data &&
+        //       error.response.data.message) ||
+        //     error.message ||
+        //     error.toString();
 
                 error => {
           const resMessage ="Please enter valid username and password";
