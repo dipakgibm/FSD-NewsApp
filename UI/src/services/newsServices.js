@@ -1,3 +1,5 @@
+import authService from "./auth.service";
+import authHeader from './auth-header';
 export class NewsService {
   apikey = "24c1f3d708a64e70bd2050c3cd2b08be";
   api = "https://newsapi.org/v2";
@@ -82,23 +84,49 @@ export class NewsService {
   
   addToReadLater = async (article) => {
     try {
-      const url = "http://localhost:3001/articles";
+//      const username=authService.getCurrentUser();
+      const user = JSON.parse(localStorage.getItem('user'));
+      console.log("Token:  "  +user.accessToken);
+
+      const url = "http://localhost:8082/articles/bookmarks/addtobookmarks/";
       let response = await fetch(url, {
         method: "post",
         headers: {
           "content-type": "application/json",
+          "Authorization": 'Bearer ' + user.accessToken,
         },
         body: JSON.stringify(article),
+        
+        
       });
 
       if (response.ok) {
         let json = await response.json();
+        // console.log("Response Ok "+json)
         return json;
       }
-
       throw new Error(response.status);
     } catch (e) {
       console.error(e);
     }
   };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

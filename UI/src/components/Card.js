@@ -1,14 +1,16 @@
 import React from "react";
 import { Button, Card as BootCard } from "react-bootstrap";
+import authService from "../services/auth.service";
 import { NewsService } from "../services/newsServices";
 
 const Card = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
   const handleAddToReadLater = () => {
     const newsServices = new NewsService();
+    const username=authService.getCurrentUser();
     newsServices
-      .addToReadLater({ title, description, imageUrl, newsUrl, author, date, source })
+      .addToReadLater({ title, description, imageUrl, newsUrl, author, date, source,username })
       .then((data) => {
-        console.log(data);
+        
         if (!data) {
           alert("error");
         } else {

@@ -1,13 +1,16 @@
 package com.newspp.FSDProject.models;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "bookmarks")
 public class Bookmarks {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private int bookmarkId;
     private String userName;
     private String title;
@@ -16,12 +19,15 @@ public class Bookmarks {
     private String sourceName;
     private String publishedAt;
 
+    private String description;
+    private String author;
+
     public Bookmarks() {
         super();
     }
 
     public Bookmarks(int bookmarkId, String userName, String title, String url, String urlToImage, String sourceName,
-                     String publishedAt) {
+                     String publishedAt,String description,String author) {
         super();
         this.bookmarkId = bookmarkId;
         this.userName = userName;
@@ -30,6 +36,24 @@ public class Bookmarks {
         this.urlToImage = urlToImage;
         this.sourceName = sourceName;
         this.publishedAt = publishedAt;
+        this.description=description;
+        this.author=author;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public int getBookmarkId() {
