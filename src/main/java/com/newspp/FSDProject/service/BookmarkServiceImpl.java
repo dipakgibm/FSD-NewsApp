@@ -1,7 +1,8 @@
 package com.newspp.FSDProject.service;
 
-import com.newspp.FSDProject.dao.BookmarkDAO;
+
 import com.newspp.FSDProject.models.Bookmarks;
+import com.newspp.FSDProject.repository.BookmarkDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

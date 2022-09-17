@@ -28,17 +28,6 @@ public class BookmarksController {
     public ResponseEntity<String> addToBookmarks(@RequestBody Bookmarks bookmark)
             throws IOException, BookmarkExistsException, BookmarksNotFoundException {
         List<Bookmarks> list = null;
-        int bookmarkId = 0;
-        try {
-            list = bookmarkService.getAllBookmarks();
-            bookmarkId = list.size();
-            bookmarkId++;
-            bookmark.setBookmarkId(bookmarkId);
-        }
-        catch (NullPointerException e) {
-            bookmark.setBookmarkId(1);
-        }
-
         List<Bookmarks> bList = bookmarkService.getBookmarkByTitle(bookmark.getTitle(), bookmark.getuserName());
 
         if (bList.isEmpty()) {
@@ -52,13 +41,6 @@ public class BookmarksController {
         }
     }
 
-    /*
-     * @GetMapping("/getbookmarks") public ResponseEntity<List<Bookmarks>>
-     * getBookmarks() { List<Bookmarks> bookmarkList =
-     * bookmarkService.getAllBookmarks(); System.out.println("Get bookmarks: " +
-     * bookmarkList); return new ResponseEntity<List<Bookmarks>>(bookmarkList,
-     * HttpStatus.OK); }
-     */
     @GetMapping("/getuserbookmarks")
     public ResponseEntity<List<Bookmarks>> getBookmarksByUser(@RequestParam("username") String username) {
         logger.info("Getting bookmarks for user");

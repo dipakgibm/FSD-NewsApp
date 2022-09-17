@@ -1,14 +1,13 @@
 package com.newspp.FSDProject.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
 @Table(name = "bookmarks")
 public class Bookmarks {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int bookmarkId;
     private String userName;
     private String title;

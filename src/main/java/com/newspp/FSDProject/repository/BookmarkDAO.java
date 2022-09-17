@@ -1,4 +1,4 @@
-package com.newspp.FSDProject.dao;
+package com.newspp.FSDProject.repository;
 
 import com.newspp.FSDProject.models.Bookmarks;
 import org.springframework.data.jpa.repository.JpaRepository;
