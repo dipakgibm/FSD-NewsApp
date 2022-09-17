@@ -8,7 +8,7 @@ const Card = ({ title, description, imageUrl, newsUrl, author, date, source }) =
     const newsServices = new NewsService();
     const username=authService.getCurrentUser();
     newsServices
-      .addToReadLater({ title, description, imageUrl, newsUrl, author, date, source })
+      .addToReadLater({ title, description, imageUrl, newsUrl, author, date, source,username })
       .then((data) => {
         
         if (!data) {

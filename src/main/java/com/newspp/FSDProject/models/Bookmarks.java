@@ -14,10 +14,10 @@ public class Bookmarks {
     private int bookmarkId;
     private String userName;
     private String title;
-    private String url;
-    private String urlToImage;
-    private String sourceName;
-    private String publishedAt;
+    private String newsUrl;
+    private String imageUrl;
+    private String source;
+    private String date;
 
     private String description;
     private String author;
@@ -26,18 +26,72 @@ public class Bookmarks {
         super();
     }
 
-    public Bookmarks(int bookmarkId, String userName, String title, String url, String urlToImage, String sourceName,
-                     String publishedAt,String description,String author) {
-        super();
+    public Bookmarks(int bookmarkId, String userName, String title, String newsUrl, String imageUrl, String source, String date, String description, String author) {
         this.bookmarkId = bookmarkId;
         this.userName = userName;
         this.title = title;
-        this.url = url;
-        this.urlToImage = urlToImage;
-        this.sourceName = sourceName;
-        this.publishedAt = publishedAt;
-        this.description=description;
-        this.author=author;
+        this.newsUrl = newsUrl;
+        this.imageUrl = imageUrl;
+        this.source = source;
+        this.date = date;
+        this.description = description;
+        this.author = author;
+    }
+
+    public int getBookmarkId() {
+        return bookmarkId;
+    }
+
+    public void setBookmarkId(int bookmarkId) {
+        this.bookmarkId = bookmarkId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getNewsUrl() {
+        return newsUrl;
+    }
+
+    public void setNewsUrl(String newsUrl) {
+        this.newsUrl = newsUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getDescription() {
@@ -54,61 +108,5 @@ public class Bookmarks {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public int getBookmarkId() {
-        return bookmarkId;
-    }
-
-    public void setBookmarkId(int bookmarkId) {
-        this.bookmarkId = bookmarkId;
-    }
-
-    public String getuserName() {
-        return userName;
-    }
-
-    public void setuserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUrlToImage() {
-        return urlToImage;
-    }
-
-    public void setUrlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
-    }
-
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
-
-    public String getPublishedAt() {
-        return publishedAt;
-    }
-
-    public void setPublishedAt(String publishedAt) {
-        this.publishedAt = publishedAt;
     }
 }

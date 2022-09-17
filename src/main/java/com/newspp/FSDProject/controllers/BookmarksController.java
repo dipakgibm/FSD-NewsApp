@@ -28,7 +28,7 @@ public class BookmarksController {
     public ResponseEntity<String> addToBookmarks(@RequestBody Bookmarks bookmark)
             throws IOException, BookmarkExistsException, BookmarksNotFoundException {
         List<Bookmarks> list = null;
-        List<Bookmarks> bList = bookmarkService.getBookmarkByTitle(bookmark.getTitle(), bookmark.getuserName());
+        List<Bookmarks> bList = bookmarkService.getBookmarkByTitle(bookmark.getTitle(), bookmark.getUserName());
 
         if (bList.isEmpty()) {
             if (bookmarkService.addBookmark(bookmark)) {
