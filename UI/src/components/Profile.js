@@ -7,7 +7,7 @@ export default class Profile extends Component {
     super(props);
 
     this.state = {
-      redirect: null,
+      navigate: null,
       userReady: false,
       currentUser: { username: "" }
     };
@@ -21,8 +21,8 @@ export default class Profile extends Component {
   }
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
+    if (this.state.navigate) {
+      return <Redirect to={this.state.navigate} />
     }
 
     const { currentUser } = this.state;

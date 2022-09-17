@@ -1,6 +1,7 @@
 package com.newspp.FSDProject.models;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -15,12 +16,13 @@ import javax.validation.constraints.Size;
       @UniqueConstraint(columnNames = "email") 
     })
 public class User {
-  @Id
+
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @NotBlank
   @Size(max = 20)
+  @Id
   private String username;
 
   @NotBlank
@@ -37,6 +39,7 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))
   private Set<Role> roles = new HashSet<>();
+
 
   public User() {
   }
