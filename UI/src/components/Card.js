@@ -4,18 +4,24 @@ import authService from "../services/auth.service";
 import { NewsService } from "../services/newsServices";
 
 const Card = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log("Token:  "  +user.username);
+  const userName=user.username;
+
   const handleAddToReadLater = () => {
     const newsServices = new NewsService();
-    const username=authService.getCurrentUser();
+    
+    
+
+
     newsServices
-      .addToReadLater({ title, description, imageUrl, newsUrl, author, date, source })
+      .addToReadLater({ title, description, imageUrl, newsUrl, author, date, source,userName })
       .then((data) => {
         
-        if (!data) {
-          alert("error");
-        } else {
-          alert(`${data.title.slice(0, 30).concat("...")} added to read later`);
-        }
+        
+          alert("Article Bookmarked successfully!!");
+       
       });
   };
 
