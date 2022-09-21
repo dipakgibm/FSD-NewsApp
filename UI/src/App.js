@@ -20,6 +20,7 @@ import { BrowserRouter, Routes,Navigate } from "react-router-dom";
 import Source from "./components/Source"
 import Footer from "./components/Footer/Footer"
 import ProtectedRoute from "./components/ProtectedRoute"
+import ReadBookmark from "./components/ReadBookmark";
 
 
 // import AuthVerify from "./common/auth-verify";
@@ -186,7 +187,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/profile" component={Profile} />
-            <ProtectedRoute exact path="/bookmark" component={<Bookmark/>} />
+            <ProtectedRoute exact path="/bookmark" component={ReadBookmark} />
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <ProtectedRoute exact path="/search" component={SearchByContent} />
             

@@ -3,25 +3,12 @@ import { Button, Card as BootCard } from "react-bootstrap";
 import authService from "../services/auth.service";
 import { NewsService } from "../services/newsServices";
 
-const Card = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
-  const handleAddToReadLater = () => {
-    const newsServices = new NewsService();
-    const username=authService.getCurrentUser();
-    newsServices
-      .addToReadLater({ title, description, imageUrl, newsUrl, author, date, source,username })
-      .then((data) => {
-        
-        if (!data) {
-          alert("error");
-        } else {
-          alert(`${data.title.slice(0, 30).concat("...")} added to read later`);
-        }
-      });
-  };
+const BookmarkCard = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
+
 
   return (
     <div className="my-3">
-      <div className="card" style={{width:"23em",height:"39em"}}>
+      <div className="card" style={{width:"23em",height:"35em"}}>
         <div style={{
           display: 'flex',
           justifyContent: 'flex-end',
@@ -38,11 +25,11 @@ const Card = ({ title, description, imageUrl, newsUrl, author, date, source }) =
           <p className="card-text" style={{fontSize:"0.9em"}}>{description}</p>
           <p className="card-text"><small className="text-muted">By {!author ? "Unknown" : author} on  {new Date(date).toGMTString()}</small></p>
           <a rel="noreferrer" href={newsUrl} target="_blank" className="btn btn-sm btn-dark">Read More </a><a>&emsp;&emsp;</a>
-          <a className="btn btn-sm btn-dark" onClick={handleAddToReadLater}>Bookmark</a>
+          
         </div>
       </div>
     </div>
   )
 
 };
-export default Card;
+export default BookmarkCard;
