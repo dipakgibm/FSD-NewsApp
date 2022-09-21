@@ -33,7 +33,7 @@ class ReadBookmark extends React.Component {
         <div className="row">
           {articles.map((element) => {
             return <div className="col-md-4" key={element.url}>
-              <BookmarkCard title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.imageUrl} newsUrl={element.newsUrl} author={element.author} date={element.publishedAt} source={element.source.name} />
+              <BookmarkCard title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.imageUrl} newsUrl={element.newsUrl} author={element.author} date={element.date} source={element.source} />
             </div>
           })}
         </div>

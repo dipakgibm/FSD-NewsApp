@@ -8,7 +8,7 @@ const BookmarkCard = ({ title, description, imageUrl, newsUrl, author, date, sou
 
   return (
     <div className="my-3">
-      <div className="card" style={{width:"23em",height:"35em"}}>
+      <div className="card" style={{width:"23em",height:"37em"}}>
         <div style={{
           display: 'flex',
           justifyContent: 'flex-end',
