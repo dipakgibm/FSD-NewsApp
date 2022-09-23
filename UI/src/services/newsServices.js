@@ -21,7 +21,7 @@ export class NewsService {
       console.error(e);
     }
   };
-  getAllArticle = async (country,page) => {
+  getAllArticle = async (country, page) => {
     const url = `${this.api}${this.top_enpoint}?country=${country}&apikey=${this.apikey}&page=${page}&pageSize=6`;
 
     try {
@@ -52,9 +52,9 @@ export class NewsService {
     }
   };
 
-  getArticlesBySource = async (domain,page) => {
-    
-      const url=`https://newsapi.org/v2/everything?domains=${domain}&apiKey=${this.apikey}&page=${page}&pageSize=6`;
+  getArticlesBySource = async (domain, page) => {
+
+    const url = `https://newsapi.org/v2/everything?domains=${domain}&apiKey=${this.apikey}&page=${page}&pageSize=6`;
     try {
       let response = await fetch(url);
       if (response.ok) {
@@ -66,29 +66,29 @@ export class NewsService {
       console.error(e);
     }
   };
-  getArticlesByCategory = async (category,page) => {
-    
+  getArticlesByCategory = async (category, page) => {
+
     const url = `${this.api}${this.top_enpoint}?country=in&category=${category}&apiKey=${this.apikey}&page=${page}&pageSize=6`;
-  try {
-    let response = await fetch(url);
-    if (response.ok) {
-      let json = await response.json();
-      return json;
+    try {
+      let response = await fetch(url);
+      if (response.ok) {
+        let json = await response.json();
+        return json;
+      }
+      throw new Error(response.status);
+    } catch (e) {
+      console.error(e);
     }
-    throw new Error(response.status);
-  } catch (e) {
-    console.error(e);
-  }
-};
+  };
 
 
-  
-ReadBookmarkarticle = async () => {
+
+  ReadBookmarkarticle = async () => {
     try {
 
       const user = JSON.parse(localStorage.getItem('user'));
-      console.log("Token:  "  +user.accessToken);
-      const userName=user.username;
+      console.log("Token:  " + user.accessToken);
+      const userName = user.username;
       let url = `http://localhost:8082/articles/bookmarks/getuserbookmarks?username=${userName}`;
       let response = await fetch(url, {
         method: "get",
@@ -96,14 +96,14 @@ ReadBookmarkarticle = async () => {
           "content-type": "application/json",
           "Authorization": 'Bearer ' + user.accessToken,
         },
-        
-        
-        
+
+
+
       });
 
       if (response.ok) {
         let json = await response.json();
-        
+
         return json;
       }
       throw new Error(response.status);
@@ -116,7 +116,7 @@ ReadBookmarkarticle = async () => {
     try {
 
       const user = JSON.parse(localStorage.getItem('user'));
-      console.log("Token:  "  +user.accessToken);
+      console.log("Token:  " + user.accessToken);
 
       const url = "http://localhost:8082/articles/bookmarks/addtobookmarks/";
       let response = await fetch(url, {
@@ -126,13 +126,13 @@ ReadBookmarkarticle = async () => {
           "Authorization": 'Bearer ' + user.accessToken,
         },
         body: JSON.stringify(article),
-        
-        
+
+
       });
 
       if (response.ok) {
         let json = await response.json();
-        // console.log("Response Ok "+json)
+
         return json;
       }
       throw new Error(response.status);

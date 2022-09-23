@@ -12,12 +12,10 @@ public interface BookmarkService {
 
     public List<Bookmarks> getAllBookmarks();
 
-
     public List<Bookmarks> getAllBookmarksByUser(String userName) throws BookmarksNotFoundException;
 
     public boolean deleteBookmark(int bookmarkId);
 
-    public List<Bookmarks> searchBookmarkByDescription(String description,String username );
-
+    public List<Bookmarks> getBookmarkByTitle(String title, String username);
 
 }

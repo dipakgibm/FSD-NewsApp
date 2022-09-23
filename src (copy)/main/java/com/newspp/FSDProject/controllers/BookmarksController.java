@@ -3,7 +3,6 @@ package com.newspp.FSDProject.controllers;
 import com.newspp.FSDProject.exception.BookmarkExistsException;
 import com.newspp.FSDProject.exception.BookmarksNotFoundException;
 import com.newspp.FSDProject.models.Bookmarks;
-import com.newspp.FSDProject.repository.BookmarkDAO;
 import com.newspp.FSDProject.service.BookmarkService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,13 +23,12 @@ public class BookmarksController {
 
     @Autowired
     private BookmarkService bookmarkService;
-    private BookmarkDAO bookmarkDAO;
 
     @PostMapping("/addtobookmarks")
     public ResponseEntity<String> addToBookmarks(@RequestBody Bookmarks bookmark)
             throws IOException, BookmarkExistsException, BookmarksNotFoundException {
         List<Bookmarks> list = null;
-        List<Bookmarks> bList = bookmarkService.searchBookmarkByDescription(bookmark.getTitle(), bookmark.getUserName());
+        List<Bookmarks> bList = bookmarkService.getBookmarkByTitle(bookmark.getTitle(), bookmark.getUserName());
 
         if (bList.isEmpty()) {
             if (bookmarkService.addBookmark(bookmark)) {
@@ -56,31 +54,15 @@ public class BookmarksController {
         }
     }
 
-
-    @GetMapping("/title")
-    public ResponseEntity<List<Bookmarks>> searchBookmarkBytitle(@RequestParam("searchText") String searchText) {
-        logger.info("search bookmarks for user");
+    @DeleteMapping("/deletebookmark")
+    public ResponseEntity<Boolean> deleteBookmark(@RequestParam("bookmarkId") Integer bookmarkId) {
         try {
-            List<Bookmarks> bookmarkList = bookmarkDAO.findByTitle("%"+searchText+"%");
-
-            return new ResponseEntity<>(bookmarkList, HttpStatus.OK);
+            bookmarkService.deleteBookmark(bookmarkId);
+            logger.info("Bookmark deleted!");
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.CONFLICT);
-
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+
     }
-
-    @GetMapping("/search")
-    public ResponseEntity<List<Bookmarks>> searchBookmarkByDescription(@RequestParam("searchText") String searchText,@RequestParam("username") String username) {
-        logger.info("search bookmarks for user");
-        try {
-            List<Bookmarks> bookmarkList = bookmarkService.searchBookmarkByDescription(searchText,username);
-
-            return new ResponseEntity<>(bookmarkList, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>( HttpStatus.CONFLICT);
-
-        }
-    }
-
 }

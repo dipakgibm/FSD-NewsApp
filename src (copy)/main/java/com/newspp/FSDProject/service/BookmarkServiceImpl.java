@@ -55,8 +55,8 @@ public class BookmarkServiceImpl implements BookmarkService {
     }
 
     @Override
-    public List<Bookmarks> searchBookmarkByDescription(String description, String username) {
-        return bookmarkDAO.findByDescriptionAndUserName(description, username);
+    public List<Bookmarks> getBookmarkByTitle(String title, String username) {
+        return bookmarkDAO.findByTitleAndUserName(title, username);
     }
 
 }
