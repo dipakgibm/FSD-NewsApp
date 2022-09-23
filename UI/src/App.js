@@ -6,9 +6,9 @@ import AuthService from "./services/auth.service";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
-import Profile from "./components/Profile";
 
-import BoardAdmin from "./components/Admin";
+
+
 import Bookmark from "./components/Bookmark"; 
 
 
@@ -173,7 +173,7 @@ class App extends Component {
           {currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link to={"/profile"} className="nav-link">
+                <Link to={"/home"} className="nav-link">
                   {currentUser.username}
                 </Link>
               </li>
@@ -207,7 +207,7 @@ class App extends Component {
             <ProtectedRoute exact path={["/", "/home"]} component={Dashboard} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
+            
             <ProtectedRoute exact path="/bookmark" component={ReadBookmark} />
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <ProtectedRoute exact path="/search" component={SearchByContent} />
