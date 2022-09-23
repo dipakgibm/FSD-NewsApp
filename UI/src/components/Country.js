@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CardGroup } from "react-bootstrap";
 import Card from "./Card";
-import { NewsService } from "../services/newsServices";
+import { NewsService } from "./newsServices";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 

@@ -1,14 +1,14 @@
 import React from "react";
 import { Button, Card as BootCard } from "react-bootstrap";
 import authService from "../services/auth.service";
-import { NewsService } from "../services/newsServices";
+import { NewsService } from "./newsServices";
 
 const Card = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
 
   const user = JSON.parse(localStorage.getItem('user'));
   console.log("Token:  "  +user.username);
   const userName=user.username;
-
+  
   const handleAddToReadLater = () => {
     const newsServices = new NewsService();
     

@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import { CardGroup } from "react-bootstrap";
-import Card from "./Card";
-import { NewsService } from "./newsServices";
+import Card from "../Card";
+import { NewsService } from "../newsServices";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 
-class dashboard extends React.Component {
+
+
+
+class science extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       articles: [],
       activePage: 1,
-      totalResults: 0,
-
+      totalResults:0,
+      
     };
     this.newsService = new NewsService();
   }
 
   componentDidMount() {
-    this.newsService.getAllArticle("in").then((data) => {
+    this.newsService.getArticlesByCategory("science").then((data) => {
       this.setState({
         articles: data.articles,
-        totalResults: data.totalResults,
+        totalResults:data.totalResults,
       });
       console.log(`Data: ${data.articles}`);
       console.log(`TotalPage count: ${data.totalResults}`)
@@ -30,11 +33,11 @@ class dashboard extends React.Component {
 
   handlePageChange = pageNumber => {
     console.log(`active page is ${pageNumber}`);
-
-    this.newsService.getAllArticle("in", pageNumber).then((data) => {
+    
+    this.newsService.getArticlesByCategory("science",pageNumber).then((data) => {
       this.setState({
         articles: data.articles,
-        totalResults: data.totalResults,
+        totalResults:data.totalResults,
       });
       console.log(data.articles);
     });
@@ -54,19 +57,19 @@ class dashboard extends React.Component {
         })}
     </div>
     
-        <div className="paginations">
-          <Pagination
-            totalItemsCount={totalResults}
-            onChange={this.handlePageChange}
-            activePage={this.state.activePage}
-            itemsCountPerPage={6}
-            pageRangeDisplayed={6}
-            itemClass="page-item"
-            linkClass="page-link"
-          />
+        <div className="paginations"> 
+        <Pagination
+          totalItemsCount={totalResults}
+          onChange={this.handlePageChange}
+          activePage={this.state.activePage}
+          itemsCountPerPage={6}
+          pageRangeDisplayed={6}
+          itemClass="page-item"
+          linkClass="page-link"
+        />
         </div>
       </div>
     );
   }
 }
-export default dashboard;
+export default science;

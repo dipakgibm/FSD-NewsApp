@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert, CardGroup } from "react-bootstrap";
-import { NewsService } from "../services/newsServices";
+import { NewsService } from "./newsServices";
 import BookmarkCard from "./BookmarkCard";
 
 

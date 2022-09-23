@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card as BootCard } from "react-bootstrap";
 import authService from "../services/auth.service";
-import { NewsService } from "../services/newsServices";
+import { NewsService } from "./newsServices";
 
 const BookmarkCard = ({ title, description, imageUrl, newsUrl, author, date, source }) => {
 

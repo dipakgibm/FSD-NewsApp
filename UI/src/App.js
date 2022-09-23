@@ -10,21 +10,42 @@ import Profile from "./components/Profile";
 
 import BoardAdmin from "./components/Admin";
 import Bookmark from "./components/Bookmark"; 
-import Category from "./components/Category"
-import Country from "./components/Country"
+
+
 import Dashboard from "./components/Dashboard";
 import SearchByContent from "./components/SearchByContent";
 
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { BrowserRouter, Routes,Navigate } from "react-router-dom";
-import Source from "./components/Source"
+import Source from "./components/source/BBC"
 import Footer from "./components/Footer/Footer"
 import ProtectedRoute from "./components/ProtectedRoute"
 import ReadBookmark from "./components/ReadBookmark";
+import India from "./components/country/India"
+import USA from "./components/country/USA"
+import UK from "./components/country/UK"
+import Ukraine from "./components/country/Ukraine"
+import China from "./components/country/China"
+import France from "./components/country/France"
+import Russia from "./components/country/Russia"
+import Business from "./components/category/Business"
+import Sports from "./components/category/Sports"
+import Entertainment from "./components/category/Entertainment"
+import Science from "./components/category/Science"
+import Health from "./components/category/Health"
+import Technology from "./components/category/Technology"
+import CNN from "./components/source/CNN"
+import Reuters from "./components/source/Reuters"
+import BBC from "./components/source/BBC"
+import Techcrunch from "./components/source/Techcrunch"
+import Thenextweb from "./components/source/Thenextweb"
+import WallStreets from "./components/source/WallStreets"
+import Washingtonpost from "./components/source/Washingtonpost"
 
 
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
+
 
 class App extends Component {
   constructor(props) {
@@ -190,53 +211,33 @@ class App extends Component {
             <ProtectedRoute exact path="/bookmark" component={ReadBookmark} />
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <ProtectedRoute exact path="/search" component={SearchByContent} />
-            
+
+           
             {/* Protected Category */}
-            <ProtectedRoute exact path="/category/business" component={Category} />
-            <ProtectedRoute exact path="/category/sports" component={Category} />
-            <ProtectedRoute exact path="/category/entertainment" component={Category} />
-            <ProtectedRoute exact path="/category/science" component={Category} />
-            <ProtectedRoute exact path="/category/health" component={Category} />
-            <ProtectedRoute exact path="/category/technology" component={Category} />
+            <ProtectedRoute exact path="/category/business" component={Business} />
+            <ProtectedRoute exact path="/category/sports" component={Sports} />
+            <ProtectedRoute exact path="/category/entertainment" component={Entertainment} />
+            <ProtectedRoute exact path="/category/science" component={Science} />
+            <ProtectedRoute exact path="/category/health" component={Health} />
+            <ProtectedRoute exact path="/category/technology" component={Technology} />
             {/* Protected Source */}
-            <ProtectedRoute exact path="/source/bbc" component={Source} />
-            <ProtectedRoute exact path="/source/wsg" component={Source} />
-            <ProtectedRoute exact path="/source/techcrunch" component={Source} />
-            <ProtectedRoute exact path="/source/cnn" component={Source} />
-            <ProtectedRoute exact path="/source/reuters" component={Source} />
-            <ProtectedRoute exact path="/source/washingtonpost" component={Source} />
-            <ProtectedRoute exact path="/source/thenextweb" component={Source} />
+            <ProtectedRoute exact path="/source/bbc" component={BBC} />
+            <ProtectedRoute exact path="/source/wsj" component={WallStreets} />
+            <ProtectedRoute exact path="/source/techcrunch" component={Techcrunch} />
+            <ProtectedRoute exact path="/source/cnn" component={CNN} />
+            <ProtectedRoute exact path="/source/reuters" component={Reuters} />
+            <ProtectedRoute exact path="/source/washingtonpost" component={Washingtonpost} />
+            <ProtectedRoute exact path="/source/thenextweb" component={Thenextweb} />
             {/* Protected Country */}
-            <ProtectedRoute exact path="/country/in" component={Country} />
-            <ProtectedRoute exact path="/country/gb" component={Country} />
-            <ProtectedRoute exact path="/country/fr" component={Country} />
-            <ProtectedRoute exact path="/country/cn" component={Country} />
-            <ProtectedRoute exact path="/country/ua" component={Country} />
-            <ProtectedRoute exact path="/country/ru" component={Country} />
-            <ProtectedRoute exact path="/country/us" component={Country} />
+            <ProtectedRoute exact path="/country/in" component={India} />
+            <ProtectedRoute exact path="/country/gb" component={UK} />
+            <ProtectedRoute exact path="/country/fr" component={France} />
+            <ProtectedRoute exact path="/country/cn" component={China} />
+            <ProtectedRoute exact path="/country/ua" component={Ukraine} />
+            <ProtectedRoute exact path="/country/ru" component={Russia} />
+            <ProtectedRoute exact path="/country/us" component={USA} />
 
 
-            <Route exact path="/category/business">< Category categories="business" /></Route>
-            <Route exact path="/category/sports"><Category categories="sports" /></Route> 
-            <Route exact path="/category/entertainment"><Category categories="entertainment" /></Route> 
-            <Route exact path="/category/science"><Category categories="science" /></Route> 
-            <Route exact path="/category/health"><Category categories="health" /></Route> 
-            <Route exact path="/category/technology"><Category categories="technology" /></Route> 
-            <Route exact path="/country/in"><Country countries="in" /></Route> 
-            <Route exact path="/country/gb"><Country countries="gb" /></Route> 
-            <Route exact path="/country/fr"><Country countries="fr" /></Route> 
-            <Route exact path="/country/cn"><Country countries="cn" /></Route> 
-            <Route exact path="/country/ua"><Country countries="ua" /></Route> 
-            <Route exact path="/country/ru"><Country countries="ru" /></Route> 
-            <Route exact path="/country/us"><Country countries="us" /></Route> 
-            <Route exact path="/source/bbc"><Source domains="bbc.com" /></Route> 
-            <Route exact path="/source/wsj"><Source domains="wsj.com" /></Route> 
-            <Route exact path="/source/techcrunch"><Source domains="techcrunch.com" /></Route> 
-            <Route exact path="/source/cnn"><Source domains="cnn.com" /></Route> 
-            <Route exact path="/source/reuters"><Source domains="reuters.com" /></Route> 
-            <Route exact path="/source/washingtonpost"><Source domains="washingtonpost.com" /></Route> 
-            <Route exact path="/source/thenextweb"><Source domains="thenextweb.com" /></Route> 
-            
 
             <Footer/>
 

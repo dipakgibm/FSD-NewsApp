@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { CardGroup } from "react-bootstrap";
-import Card from "./Card";
-import { NewsService } from "./newsServices";
+import Card from "../Card";
+import { NewsService } from "../newsServices";
 import axios from "axios";
 import Pagination from "react-js-pagination";
 
-class dashboard extends React.Component {
+class Techcrunch extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +18,7 @@ class dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.newsService.getAllArticle("in").then((data) => {
+    this.newsService.getArticlesBySource("techcrunch.com").then((data) => {
       this.setState({
         articles: data.articles,
         totalResults: data.totalResults,
@@ -31,7 +31,7 @@ class dashboard extends React.Component {
   handlePageChange = pageNumber => {
     console.log(`active page is ${pageNumber}`);
 
-    this.newsService.getAllArticle("in", pageNumber).then((data) => {
+    this.newsService.getArticlesBySource("techcrunch.com", pageNumber).then((data) => {
       this.setState({
         articles: data.articles,
         totalResults: data.totalResults,
@@ -69,4 +69,4 @@ class dashboard extends React.Component {
     );
   }
 }
-export default dashboard;
+export default Techcrunch;
