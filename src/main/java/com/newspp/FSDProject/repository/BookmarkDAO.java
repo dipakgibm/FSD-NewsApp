@@ -18,7 +18,11 @@ public interface BookmarkDAO extends JpaRepository<Bookmarks, Integer> {
     public List<Bookmarks> findByTitle(String title);
     String rawQuery="SELECT * FROM bookmarks b WHERE b.user_name =:user and b.description like %:desc%";
     @Query(nativeQuery = true, value = rawQuery)
-    public List<Bookmarks> findByDescriptionAndUserName(@Param("desc")String title,@Param("user")String username);
+    public List<Bookmarks> findByDescriptionAndUserName(@Param("desc")String description,@Param("user")String username);
+
+    String rawQuerySource="SELECT * FROM bookmarks b WHERE b.user_name =:user and b.source=:src";
+    @Query(nativeQuery = true, value = rawQuerySource)
+    public List<Bookmarks> findBySourceAndUserName(@Param("src") String source,@Param("user") String username);
 
 
 }

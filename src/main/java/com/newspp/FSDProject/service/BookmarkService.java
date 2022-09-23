@@ -18,6 +18,7 @@ public interface BookmarkService {
     public boolean deleteBookmark(int bookmarkId);
 
     public List<Bookmarks> searchBookmarkByDescription(String description,String username );
+    public List<Bookmarks> searchBookmarkBySource(String source,String username );
 
 
 }

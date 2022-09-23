@@ -70,11 +70,24 @@ public class BookmarksController {
         }
     }
 
-    @GetMapping("/search")
+    @GetMapping("/searchByDescription")
     public ResponseEntity<List<Bookmarks>> searchBookmarkByDescription(@RequestParam("searchText") String searchText,@RequestParam("username") String username) {
-        logger.info("search bookmarks for user");
+        logger.info("search bookmarks for user by Description");
         try {
             List<Bookmarks> bookmarkList = bookmarkService.searchBookmarkByDescription(searchText,username);
+
+            return new ResponseEntity<>(bookmarkList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>( HttpStatus.CONFLICT);
+
+        }
+    }
+
+    @GetMapping("/searchBySource")
+    public ResponseEntity<List<Bookmarks>> searchBookmarkBySource(@RequestParam("searchText") String searchText,@RequestParam("username") String username) {
+        logger.info("search bookmarks for user by sources");
+        try {
+            List<Bookmarks> bookmarkList = bookmarkService.searchBookmarkBySource(searchText,username);
 
             return new ResponseEntity<>(bookmarkList, HttpStatus.OK);
         } catch (Exception e) {
