@@ -17,7 +17,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/articles/bookmarks")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8081", allowedHeaders = "*")
+
 public class BookmarksController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());

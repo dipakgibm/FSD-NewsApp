@@ -4,8 +4,10 @@ import  Card  from "./Card";
 import { NewsService } from "./newsServices";
 import axios from "axios";
 import Pagination from "react-js-pagination";
+import authHeader from '../services/auth-header';
+import BookmarkCard from "./BookmarkCard";
 
-class SearchByContent extends React.Component {
+class BookmarkSearch extends React.Component {
   apikey = "89009dda8a5449ecbe90dc7a25510b8a"
   api = "https://newsapi.org/v2";
   top_enpoint = "/top-headlines";
@@ -24,7 +26,7 @@ class SearchByContent extends React.Component {
 
 
   getInfo = (page) => {
-    axios.get(`${this.api}/everything?q=${this.state.query}&apiKey=${this.apikey}&language=en&page=${page}&pageSize=6`)
+    axios.get(`localhost:8082/articles/bookmarks/searchByDescription?searchText=${this.state.query}&username=admin`, { headers: authHeader() })
       .then(({ data }) => {
         this.setState({
           articles: data.articles,     
@@ -98,8 +100,8 @@ class SearchByContent extends React.Component {
       <div className="row">
         {articles.map((element) => {
             return <div className="col-md-4" key={element.url}>
-                <Card title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.urlToImage} newsUrl={element.url} author={element.author} date={element.publishedAt} source={element.source.name} />
-            </div>
+                <BookmarkCard title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.imageUrl} newsUrl={element.newsUrl} author={element.author} date={element.date} source={element.source} />
+             </div>
         })}
     </div>
 
@@ -118,4 +120,4 @@ class SearchByContent extends React.Component {
     );
   }
 }
-export default SearchByContent;
+export default BookmarkSearch;

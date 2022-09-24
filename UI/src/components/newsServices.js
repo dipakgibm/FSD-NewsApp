@@ -90,6 +90,7 @@ export class NewsService {
       console.log("Token:  " + user.accessToken);
       const userName = user.username;
       let url = `http://localhost:8082/articles/bookmarks/getuserbookmarks?username=${userName}`;
+      
       let response = await fetch(url, {
         method: "get",
         headers: {
@@ -111,6 +112,41 @@ export class NewsService {
       console.error(e);
     }
   };
+
+
+  SearchBookmarkarticle = async () => {
+    try {
+
+      const user = JSON.parse(localStorage.getItem('user'));
+      console.log("Token:  " + user.accessToken);
+      const userName = user.username;
+      
+      let url = `localhost:8082/articles/bookmarks/searchByDescription?searchText=India&username=admin`;
+      let response = await fetch(url, {
+        method: "get",
+        headers: {
+          "content-type": "application/json",
+          "Authorization": 'Bearer ' + user.accessToken,
+          
+        },
+
+
+
+      });
+
+      if (response.ok) {
+        let json = await response.json();
+
+        return json;
+        console.log("Print something"+json)
+      }
+      throw new Error(response.status);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+
 
   addToReadLater = async (article) => {
     try {

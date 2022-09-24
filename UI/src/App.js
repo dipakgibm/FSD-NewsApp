@@ -41,6 +41,7 @@ import Techcrunch from "./components/source/Techcrunch"
 import Thenextweb from "./components/source/Thenextweb"
 import WallStreets from "./components/source/WallStreets"
 import Washingtonpost from "./components/source/Washingtonpost"
+import BookmarkSearch from "./components/BookmarkSearch";
 
 
 // import AuthVerify from "./common/auth-verify";
@@ -114,6 +115,11 @@ class App extends Component {
             <li className="nav-item">
               <a href={"/home"} className="nav-link">
                 Home
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href={"/bookmarkSearch"} className="nav-link">
+                Bookmark Search
               </a>
             </li>
             
@@ -211,6 +217,8 @@ class App extends Component {
             <ProtectedRoute exact path="/bookmark" component={ReadBookmark} />
             <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             <ProtectedRoute exact path="/search" component={SearchByContent} />
+            <ProtectedRoute exact path="/bookmarkSearch" component={BookmarkSearch} />
+            
 
            
             {/* Protected Category */}
