@@ -1,4 +1,4 @@
-package com.newspp.FSDProject.service;
+package com.newspp.FSDProject.bookmarkservice;
 
 import com.newspp.FSDProject.exception.BookmarkExistsException;
 import com.newspp.FSDProject.exception.BookmarksNotFoundException;

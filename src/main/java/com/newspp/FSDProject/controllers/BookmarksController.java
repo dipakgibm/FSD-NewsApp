@@ -4,7 +4,7 @@ import com.newspp.FSDProject.exception.BookmarkExistsException;
 import com.newspp.FSDProject.exception.BookmarksNotFoundException;
 import com.newspp.FSDProject.models.Bookmarks;
 import com.newspp.FSDProject.repository.BookmarkDAO;
-import com.newspp.FSDProject.service.BookmarkService;
+import com.newspp.FSDProject.bookmarkservice.BookmarkService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
 import authService from "../services/auth.service";
 import authHeader from '../services/auth-header';
+import axios from "axios";
 export class NewsService {
   apikey = "24c1f3d708a64e70bd2050c3cd2b08be";
   api = "https://newsapi.org/v2";
@@ -97,9 +98,6 @@ export class NewsService {
           "content-type": "application/json",
           "Authorization": 'Bearer ' + user.accessToken,
         },
-
-
-
       });
 
       if (response.ok) {
@@ -114,38 +112,34 @@ export class NewsService {
   };
 
 
+
   SearchBookmarkarticle = async () => {
+    
     try {
 
       const user = JSON.parse(localStorage.getItem('user'));
       console.log("Token:  " + user.accessToken);
       const userName = user.username;
-      
-      let url = `localhost:8082/articles/bookmarks/searchByDescription?searchText=India&username=admin`;
+      let url = `localhost:8082/articles/bookmarks/searchByDescription?searchText=India&username=${userName}`;
+      // axios.get(`localhost:8082/articles/bookmarks/searchByDescription?searchText=India&username=admin`, { headers: authHeader() })
       let response = await fetch(url, {
         method: "get",
         headers: {
           "content-type": "application/json",
           "Authorization": 'Bearer ' + user.accessToken,
-          
         },
-
-
-
       });
 
       if (response.ok) {
         let json = await response.json();
 
         return json;
-        console.log("Print something"+json)
       }
       throw new Error(response.status);
     } catch (e) {
       console.error(e);
     }
   };
-
 
 
   addToReadLater = async (article) => {

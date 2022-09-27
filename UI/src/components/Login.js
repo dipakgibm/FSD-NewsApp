@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import './style/styles.css'
 
 import AuthService from "../services/auth.service";
 
@@ -118,7 +119,7 @@ export default class Login extends Component {
 
             <div className="form-group">
               <button
-                className="btn btn-primary btn-block"
+                className="btn btn-secondary btn-block"
                 disabled={this.state.loading}
               >
                 {this.state.loading && (

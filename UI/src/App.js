@@ -107,9 +107,9 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-secondary">
+        <nav className="navbar navbar-expand navbar-dark bg-secondary fixed-top">
           <Link to={"/"} className="navbar-brand">
-            News App
+                       World News
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -117,11 +117,11 @@ class App extends Component {
                 Home
               </a>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a href={"/bookmarkSearch"} className="nav-link">
                 Bookmark Search
               </a>
-            </li>
+            </li> */}
             
             {(
               <li className="nav-item">
