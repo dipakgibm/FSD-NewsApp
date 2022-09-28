@@ -31,17 +31,13 @@ public class BookmarksController {
     public ResponseEntity<String> addToBookmarks(@RequestBody Bookmarks bookmark)
             throws IOException, BookmarkExistsException, BookmarksNotFoundException {
         List<Bookmarks> list = null;
-        List<Bookmarks> bList = bookmarkService.searchBookmarkByDescription(bookmark.getTitle(), bookmark.getUserName());
 
-        if (bList.isEmpty()) {
             if (bookmarkService.addBookmark(bookmark)) {
                 return new ResponseEntity<>("Created", HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>("Conflict", HttpStatus.CONFLICT);
             }
-        } else {
-            return new ResponseEntity<>("Conflict", HttpStatus.CONFLICT);
-        }
+
     }
 
     @GetMapping("/getuserbookmarks")

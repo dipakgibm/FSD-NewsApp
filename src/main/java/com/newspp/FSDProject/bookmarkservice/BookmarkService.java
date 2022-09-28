@@ -15,10 +15,6 @@ public interface BookmarkService {
 
     public List<Bookmarks> getAllBookmarksByUser(String userName) throws BookmarksNotFoundException;
 
-    public boolean deleteBookmark(int bookmarkId);
-
-    public List<Bookmarks> searchBookmarkByDescription(String description,String username );
-    public List<Bookmarks> searchBookmarkBySource(String source,String username );
 
 
 }
