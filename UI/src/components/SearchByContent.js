@@ -4,6 +4,7 @@ import  Card  from "./Card";
 import { NewsService } from "./newsServices";
 import axios from "axios";
 import Pagination from "react-js-pagination";
+import "./Search.css"
 
 class SearchByContent extends React.Component {
   apikey = "89009dda8a5449ecbe90dc7a25510b8a"
@@ -85,7 +86,7 @@ class SearchByContent extends React.Component {
   render() {
     const { totalResults,articles } = this.state;
     return (
-      <div>
+      <div className="search" >
          <form onSubmit={this.handleSubmit}>
         <input
           placeholder="Search for..."

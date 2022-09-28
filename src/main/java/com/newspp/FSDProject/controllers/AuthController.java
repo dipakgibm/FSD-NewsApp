@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.newspp.FSDProject.payload.request.LoginRequest;
 import com.newspp.FSDProject.payload.response.JwtResponse;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
